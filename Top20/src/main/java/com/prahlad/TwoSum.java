@@ -4,7 +4,9 @@
 package com.prahlad;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * @author Prahlad created on 31-May-2017
@@ -32,7 +34,8 @@ public class TwoSum {
 	}
 	/**
 	 * take one element and search in remaining elements
-	 * 
+	 *  TC : log n + log (n-1) + ... +1
+	 *  	~ n log n
 	 * @param in
 	 * @param s
 	 * @return
@@ -41,6 +44,44 @@ public class TwoSum {
 		for(int i=0;i<in.length;i++){
 			if(Arrays.binarySearch(in, i+1, in.length, s-in[i]) <= 0){
 				return true;
+			}
+		}
+		return false;
+	}
+	/**
+	 * 
+	 * @param in
+	 * @param s
+	 * @return
+	 */
+	public static boolean twoSum3(int[] in, int s){
+		for(int i=0,j=in.length-1;i<j;){
+			if(in[i]+in[j] == s){
+				return true;
+			} else if (in[i]+in[j] < s){
+				i++;
+			} else{
+				j--;
+			}
+			
+		}
+		return false;
+	}
+	/**
+	 * TC: n * c ~ O(n)
+	 * SC: O(n)
+	 * 
+	 * @param in
+	 * @param s
+	 * @return
+	 */
+	public static boolean twoSum4(int[] in , int s){
+		Set<Integer> set = new HashSet<Integer>();
+		for(int i =0;i<in.length;i++){
+			if(set.contains(s-in[i])){
+				return true;
+			} else {
+				set.add(in[i]);
 			}
 		}
 		return false;
@@ -55,13 +96,14 @@ public class TwoSum {
 		for(int i=0;i<size;i++){
 			in[i]=r.nextInt(size)+1;
 		}
+		//int[] in = {2,5,7,8,10};
 		int s = r.nextInt(size);
-		Arrays.sort(in);
+		//Arrays.sort(in);
 //		for(int i:in)
 //			System.out.print(i + " ");
 		System.out.println("\nSum: "+ s);
 		long start = System.currentTimeMillis();
-		System.out.println(twoSum2(in, s));
+		System.out.println(twoSum4(in, s));
 		long end = System.currentTimeMillis();
 		System.out.println("Time Taken: "+ (end - start)/1000.0 +" seconds");
 	}
