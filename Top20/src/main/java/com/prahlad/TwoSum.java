@@ -3,6 +3,8 @@
  */
 package com.prahlad;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
@@ -49,7 +51,8 @@ public class TwoSum {
 		return false;
 	}
 	/**
-	 * 
+	 * TC : O(n)
+	 * SC: O(1)
 	 * @param in
 	 * @param s
 	 * @return
@@ -96,16 +99,43 @@ public class TwoSum {
 		for(int i=0;i<size;i++){
 			in[i]=r.nextInt(size)+1;
 		}
-		//int[] in = {2,5,7,8,10};
 		int s = r.nextInt(size);
+//		int[] in = {2,5,7,8,10};
+//		int s = 0;
 		//Arrays.sort(in);
 //		for(int i:in)
 //			System.out.print(i + " ");
 		System.out.println("\nSum: "+ s);
-		long start = System.currentTimeMillis();
-		System.out.println(twoSum4(in, s));
-		long end = System.currentTimeMillis();
-		System.out.println("Time Taken: "+ (end - start)/1000.0 +" seconds");
+		executeTestCase(in,s);
+		
 	}
-
+	private static void executeTestCase(int[] in, int s) {
+		execute(in,s,4);
+		Arrays.sort(in);
+		execute(in,s,1);
+		execute(in,s,2);
+		execute(in,s,3);
+	}
+	
+	private static void execute(int[] in,int s,int i){
+		
+		String methodName = "twoSum"+i;
+		System.out.println("executing method : "+ methodName);
+        
+		Method method;
+		try {
+			Class<TwoSum> obj = (Class<TwoSum>) Class.forName("com.prahlad.TwoSum");
+			method = obj.getMethod(methodName,int[].class,int.class);
+			long start = System.currentTimeMillis();
+			System.out.println(method.invoke(obj,in, s));
+			long end = System.currentTimeMillis();
+			System.out.println("Time Taken: "+ (end - start)/1000.0 +" seconds");		
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 }
