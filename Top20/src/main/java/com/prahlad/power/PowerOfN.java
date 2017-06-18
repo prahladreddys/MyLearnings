@@ -12,7 +12,7 @@ public class PowerOfN {
 	}
 	// TC : O(log n)
 	// SC : O(log n) 
-	// Pushing and poping stack frame is over head in each recursion call
+	// Pushing and popping stack frame is over head in each recursion call
 	public static long power2(int x, int n){
 		if(n == 1) return x;
 		long res = power2(x,n/2);
