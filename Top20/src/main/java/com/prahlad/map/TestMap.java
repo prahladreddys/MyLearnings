@@ -16,6 +16,7 @@ public class TestMap {
 		}
 		System.out.println(map.size());
 		map.display();
+		System.out.println(map.get(""+75));
 	}
 
 }
