@@ -1,10 +1,10 @@
-package com.prahlad.tree;
+package com.prahlad.tree1;
 
 public class TreeNode {
 	Integer data;
 	TreeNode left;
 	TreeNode right;
-	public TreeNode(Integer data){
+	TreeNode(Integer data){
 		this.data = data;
 	}
 }

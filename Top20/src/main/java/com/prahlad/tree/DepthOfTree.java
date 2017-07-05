@@ -12,8 +12,11 @@ public class DepthOfTree {
 		return 0;
 	}
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		int n = Integer.parseInt(args[0]);
+		TreeNode root = BinaryTreeUtils.createBinaryTree(n);
+		BinaryTreeUtils.displayBinaryTree(root);
+		System.out.println("Height of Tree: "+ depthOfTree1(root));
+		ExploreAllPaths.explorePaths(root);
 	}
 
 }
