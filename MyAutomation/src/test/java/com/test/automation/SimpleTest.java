@@ -6,15 +6,48 @@ package com.test.automation;
 import static org.testng.Assert.assertEquals;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+import com.test.automation.common.SetUp;
 
 /**
  * @author Prahlad created on 04-Jul-2017
  *
  */
 public class SimpleTest {
+	private WebDriver driver;
+	private ExtentReports report;
+	private ExtentTest logger;
+	@BeforeSuite
+	public void beforeTest(){
+		driver = SetUp.getDriver();
+		report = SetUp.getExtentReports();
+		logger = SetUp.getExtentTest();
+	}	
+	
+	@Test(invocationCount = 2)
+	public void loadWebsite() throws InterruptedException{
+		
+		driver.get("http://www.news.google.com");
+		logger.log(LogStatus.INFO,"Page Title: "+ driver.getTitle());
+		assertEquals("Google News", driver.getTitle());
+		Thread.sleep(5000);
+		logger.log(LogStatus.INFO, "Success");
+		report.endTest(logger);
+	}
+	
+	@AfterSuite
+	public void end(){
+		report.flush();
+		driver.quit();
+		report.close();
+	}
 	@Test
 	public void testMeth(){
 		Simple simple = new Simple();
@@ -22,14 +55,5 @@ public class SimpleTest {
 		
 		Assert.assertNotNull(result);
 		Assert.assertEquals(result, "hello");
-	}
-	@Test
-	public void loadWebsite(){
-		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
-		driver.get("http://www.google.com");
-		System.out.println("Page Title: "+ driver.getTitle());
-		assertEquals("Google", driver.getTitle());
-		driver.quit();
 	}
 }
