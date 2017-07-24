@@ -1,9 +1,11 @@
 package com.prahlad.trees;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 public class BinaryTreeUtils {
 	public static TreeNode createBinaryTree(int n){
-		Random r = new Random(2016);
+		Random r = new Random(17);
 		TreeNode root = null;
 		for(int i=0;i<n;i++){
 			int data = r.nextInt(n)+1;
@@ -78,5 +80,27 @@ public class BinaryTreeUtils {
 		System.out.println("\nPost Order");
 		postOrder(root);
 	}
-
+	public static void displayTree1(TreeNode root) {
+		Queue<TreeNode> q = new LinkedList<TreeNode>();
+		q.add(root);
+		q.add(null);
+		TreeNode dummy = new TreeNode(-1);
+		while(true) {
+			TreeNode tmp = q.remove();
+			if(tmp == null) {
+				System.out.println();
+				if(! q.isEmpty())
+					q.add(null);
+				else 
+					break;
+			} else {				
+				System.out.print(tmp.data+ " ");
+				if(tmp == dummy)  continue;
+				if(tmp.left != null) q.add(tmp.left);
+				else q.add(dummy);
+				if(tmp.right != null) q.add(tmp.right);
+				else q.add(dummy);
+			}
+		}	
+	}
 }
