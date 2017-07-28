@@ -53,14 +53,16 @@ public class KthLineFromFile {
 	public static void readFileMaintainCacheOffset(String path,int k) throws IOException {
 		RandomAccessFile raf = new RandomAccessFile(path, "r");
 		String line;
-		Map<Integer,Long> offsetCache = new java.util.HashMap<>();
-		int lineNo = 1;
+		Map<Long,Long> line_index = new java.util.HashMap<>();
+		long lineNo = 1;
+		line_index.put(lineNo, 0L);
 		while((line = raf.readLine()) !=null){
 			//System.out.print(line +"\t"+raf.getFilePointer());
-			offsetCache.put(lineNo++, raf.getFilePointer());
+			line_index.put(lineNo++, raf.getFilePointer());
 		}
-		System.out.println(offsetCache);
-		raf.seek(offsetCache.get((lineNo-2)-(k-1)));
+		System.out.println(line_index);
+		System.out.println("Total lines: " + lineNo);
+		raf.seek(line_index.get(lineNo - k));
 		System.out.println(raf.readLine());
 		raf.close();
 	}
