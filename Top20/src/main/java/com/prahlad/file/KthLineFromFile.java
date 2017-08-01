@@ -2,7 +2,6 @@ package com.prahlad.file;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -10,8 +9,6 @@ import java.nio.charset.Charset;
 import java.util.Map;
 
 import org.apache.commons.io.input.ReversedLinesFileReader;
-
-import com.prahlad.map.HashMap;
 
 public class KthLineFromFile {
 	// Getting kth line from the file from bottom
@@ -58,7 +55,7 @@ public class KthLineFromFile {
 		line_index.put(lineNo, 0L);
 		while((line = raf.readLine()) !=null){
 			//System.out.print(line +"\t"+raf.getFilePointer());
-			line_index.put(lineNo++, raf.getFilePointer());
+			line_index.put(++lineNo, raf.getFilePointer());
 		}
 		System.out.println(line_index);
 		System.out.println("Total lines: " + lineNo);
