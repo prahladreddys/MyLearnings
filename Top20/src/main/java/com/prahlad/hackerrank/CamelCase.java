@@ -1,0 +1,22 @@
+package com.prahlad.hackerrank;
+
+import java.util.Scanner;
+
+public class CamelCase {
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		String s = in.next();
+		char[] ch = s.toCharArray();
+		int count;
+		count = Character.isLowerCase(ch[0])? 1 : 0;
+		for(int i=0;i<ch.length;i++){			
+			if(Character.isUpperCase(ch[i])){
+				count ++;
+			}
+		}
+		System.out.println(count);
+		in.close();
+	}
+
+}
