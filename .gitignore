@@ -1,3 +1,6 @@
+target/
+.settings/
+test-output/
 # Compiled class file
 *.class
 
