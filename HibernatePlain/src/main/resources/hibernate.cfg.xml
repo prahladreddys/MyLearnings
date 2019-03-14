@@ -1,0 +1,39 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+   <session-factory>
+   
+      <property name = "hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
+      
+      <property name = "hibernate.connection.driver_class">org.postgresql.Driver</property>
+      
+      <!-- Assume test is the database name -->
+      
+      <property name = "hibernate.connection.url">jdbc:postgresql://172.16.18.41:5432/cfgdb</property>
+      
+      <property name = "hibernate.connection.username">postgres</property>
+      
+      <property name = "hibernate.connection.password">postgres</property>
+      <property name = "hibernate.default_schema">prahlad1</property>
+              <!-- Echo the SQL to stdout -->
+
+        <property name="show_sql">true</property>
+
+        <!-- Set the current session context -->
+
+        <property name="current_session_context_class">thread</property>
+
+        <!-- Drop and re-create the database schema on startup -->
+
+        <!-- property name="hbm2ddl.auto">create-drop</property> -->
+
+        <!-- dbcp connection pool configuration -->
+
+        
+      <!-- List of XML mapping files 
+      <mapping resource = "Employee.hbm.xml"/>-->
+      <mapping class="com.prahlad.HibernatePlain.Employee"></mapping>
+      
+   </session-factory>
+</hibernate-configuration>
